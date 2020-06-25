@@ -1,0 +1,90 @@
+<div class="container">
+  <!-- Panel -->
+  <div class="row" style="margin-top:12px;">
+    <div class="col-md-8">
+      <input type="text"
+             class="form-control"
+             style="width: 100%;"
+             placeholder="Search production lines...">
+    </div>
+    <div class="col-md-4">
+      <button type="button"
+              class="btn btn-danger pull-right"
+              style="margin-left:8px;"> Alarm
+      </button>
+      <button type="button"
+              (click)="createProductionLine()"
+              class="btn btn-info pull-right"
+              style="margin-left:8px;"><i class="fa fa-plus"></i> New Line
+      </button>
+      <button type="button"
+              (click)="createRobot()"
+              class="btn btn-warning pull-right"
+              style="margin-left:8px;"><i class="fa fa-plus"></i> New Robot
+      </button>
+    </div>
+  </div>
+  </div>
+
+  <!-- Production Line content -->
+  <div class="row" style="margin-top: 28px;">
+    <!-- Production Line menu -->
+    <div class="col-md-3">
+      <br>
+      <p></p>
+      <div class="list-group list-group-flush">
+        <a class="list-group-item list-group-item-action">
+          <i class="fa fas fa-industry"></i>&nbsp;All Production Lines
+        </a>
+        <!-- Production Line -->
+        <a *ngFor="let productionLine of productionLines" class="list-group-item list-group-item-action">
+          <i class="fa fas fa-industry"></i>&nbsp;
+          <input [(ngModel)]="productionLine.name" (change)="updateProductionLine(productionLine)" type="text" class="input-label" style="width: 80%"/>
+          <a (click)="deleteProductionLine(productionLine)" class="pull-right text-danger">
+            <i class="fa fa-trash-o"></i>
+          </a>
+          <label>Type:
+          <input [(ngModel)]="productionLine.type" (change)="updateProductionLine(productionLine)" type="text" class="input-label" style="width: 80%"/>
+          </label>
+          <span><span>id: </span>{{productionLine.id}}</span>
+        </a>
+      </div>
+    </div>
+
+
+
+    <!-- Robot Panel -->
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-md-12">
+          <p *ngIf="this.robots.length === 0">There are no robots to display</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+        <div class="list-group list-group-flush">
+          <a class="list-group-item list-group-item-action">
+            <i class="fa fas fa-industry"></i>&nbsp;All Robots
+          </a>
+          <!-- Robots List -->
+          <a *ngFor="let robot of robots" class="list-group-item list-group-item-action">
+            <i class="fa fa-terminal"></i>&nbsp;
+            <span class="pull-right" ><span>Id: </span>{{robot.id}}</span>
+            <input [(ngModel)]="robot.name" (change)="updateRobot(robot)" type="text" class="input-label" style="width: 80%"/>
+            <label>line Id:&nbsp;
+              <input [(ngModel)]="robot.lineId" (change)="updateRobot(robot)" type="text" class="input-label" style="width: 30%"/>
+            </label>
+            <label>max. range:&nbsp;
+              <input [(ngModel)]="robot.maxRange" (change)="updateRobot(robot)" type="text" class="input-label" style="width: 30%"/>
+            </label>
+            <label>max. load:&nbsp;
+              <input [(ngModel)]="robot.maxLoad" (change)="updateRobot(robot)" type="text" class="input-label" style="width: 30%"/>
+            </label>
+            <a (click)="deleteRobot(robot)" class="pull-right text-danger">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </a>
+        </div>
+        </div>
+  </div>
+</div>
